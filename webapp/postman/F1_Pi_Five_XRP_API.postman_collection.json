@@ -1,0 +1,109 @@
+{
+  "info": {
+    "name": "F1 AI Pi Five XRP API",
+    "description": "Collection per testare tutte le API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8000/health",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["health"]
+        }
+      }
+    },
+    {
+      "name": "Create Wallet",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"seed\": \"\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8000/wallet/create",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["wallet", "create"]
+        }
+      }
+    },
+    {
+      "name": "Get Balance",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8000/wallet/{{address}}/balance",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["wallet", "{{address}}", "balance"]
+        }
+      }
+    },
+    {
+      "name": "Send Payment",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"sender_seed\": \"{{sender_seed}}\",\n  \"destination\": \"rPEPPER7kfTD9w2To4CQk6UCfuHM9c6GDY\",\n  \"amount\": 10\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8000/payment",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": ["payment"]
+        }
+      }
+    },
+    {
+      "name": "API Root",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8000/",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8000",
+          "path": [""]
+        }
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "address",
+      "value": "rN7n7otQDd6FczFgLdlqtyMVrn3HMbjYjh",
+      "type": "string"
+    },
+    {
+      "key": "sender_seed",
+      "value": "sEdSKaCy2JT7JaM7v95H9SxkhP9wS2r",
+      "type": "string"
+    }
+  ]
+}

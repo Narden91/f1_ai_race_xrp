@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>F1 AI Racing - XRP Ledger</title>
+    <script>
+      // Early GemWallet detection (runs before React loads)
+      console.log('🔬 [PRE-REACT] Early GemWallet check...');
+      console.log('🔬 [PRE-REACT] window.gemWallet exists:', typeof window.gemWallet !== 'undefined');
+      console.log('🔬 [PRE-REACT] window.gemWallet value:', window.gemWallet);
+      
+      // Check repeatedly for 3 seconds before React loads
+      let preReactChecks = 0;
+      const preReactInterval = setInterval(() => {
+        preReactChecks++;
+        if (typeof window.gemWallet !== 'undefined') {
+          console.log('✅ [PRE-REACT] GemWallet detected on attempt', preReactChecks);
+          console.log('✅ [PRE-REACT] GemWallet object:', window.gemWallet);
+          clearInterval(preReactInterval);
+        } else if (preReactChecks >= 15) {
+          console.error('❌ [PRE-REACT] GemWallet NOT detected after 15 attempts (3 seconds)');
+          console.error('❌ [PRE-REACT] Extension may not be installed or has permission issues');
+          clearInterval(preReactInterval);
+        }
+      }, 200);
+      
+      // Log all window properties that might be related
+      setTimeout(() => {
+        const allProps = Object.keys(window);
+        const gemRelated = allProps.filter(k => 
+          k.toLowerCase().includes('gem') || 
+          k.toLowerCase().includes('xrp') ||
+          k.toLowerCase().includes('wallet')
+        );
+        console.log('🔬 [PRE-REACT] Related properties on window:', gemRelated);
+      }, 1000);
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
